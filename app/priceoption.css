@@ -1,0 +1,42 @@
+/* priceoption.css */
+.price-section {
+    margin-top: 10px; /* 가격과 선 사이의 간격 조절 */
+}
+
+.price-text {
+    font-weight: bold; /* 가격 텍스트를 두껍게 설정 */
+    font-size: 1.25rem; /* 가격 텍스트 크기 조절 */
+    display: block; /* 블록 요소로 설정하여 상하 여백 조절 가능 */
+}
+
+.price-line {
+    border: 4px solid black; /* 두꺼운 선으로 설정 */
+    margin: 10px 0; /* 선 위아래의 간격 조절 */
+    width: 100%; /* 전체 가로 길이에 맞게 설정 */
+    opacity: 1 !important;
+}
+
+.button-group {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.button-group .reset-button {
+    width: 80px !important;
+    height: 44px !important;
+    border-color: #5724be;
+    background-color: #FFFFFF !important;
+    color: black;
+}
+
+.button-group .view-button {
+    width: 156px !important;
+    height: 44px !important;
+    border-color: #5724be;
+    background-color: #5724be !important;
+}
+
+.button-group .btn + .btn {
+    margin-left: 10px; /* 버튼 사이의 간격 조절 */
+}

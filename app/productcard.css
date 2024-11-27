@@ -1,0 +1,16 @@
+.card-image-wrapper {
+    position: relative;
+}
+
+.save-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 24px; /* 아이콘 크기 조절 */
+    height: 24px; /* 아이콘 크기 조절 */
+    cursor: pointer; /* 클릭 가능한 아이콘임을 나타냅니다. */
+}
+
+.position-relative {
+    position: relative;
+}

@@ -1,0 +1,65 @@
+.description-card {
+    max-width: 300px;
+    background-color: #FFFBF5;
+  }
+  
+  .product-info-title {
+    color: #5724BE;
+    font-weight: bold;
+  }
+
+  .product-info-text {
+    font-size: small;
+    color: gray;
+    margin-top: 0.5rem;
+  }
+  
+  .product-info-author {
+    margin-top: 0.5rem;
+  }
+  
+  .product-info-description {
+    word-wrap: break-word;
+    margin-top: 0.5rem; /* Bootstrap mt-2에 대응 */
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem; /* Bootstrap mt-3에 대응 */
+  }
+  
+  .buy-button {
+    background-color: #5724BE;
+    color: #FFFFFF;
+    flex-grow: 1;
+    border-radius: 0;
+    border-color: #5724BE;
+  }
+  .buy-button:focus, .buy-button:active, .buy-button:hover {
+    background-color: #5724BE !important;
+    outline: none !important;
+    box-shadow: none !important;
+    color: #FFFFFF !important;  /* 화살표 색을 검정색으로 유지 */
+  }
+  
+  /* 좋아요 버튼과 유사한 상자 스타일 */
+  .like-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px; /* 버튼과 같은 높이 */
+    height: 38px; /* 버튼과 같은 높이 */
+    background-color: #FFFBF5; /* 구매 버튼과 같은 배경색 */
+    border-color: #5724BE;
+    border: 1px solid #5724BE;
+    border-radius: 0;
+    cursor: pointer;
+  }
+  
+  .bookmark-icon {
+    width: 24px; /* 아이콘 크기 조정 */
+    height: 24px;
+  }
+  

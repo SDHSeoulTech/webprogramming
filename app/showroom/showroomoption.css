@@ -1,0 +1,25 @@
+/* ShowRoomOption.css */
+
+/* 공통 스타일 */
+.tag-button {
+  padding: 10px;
+  margin: 5px;
+  background-color: transparent; /* 선택되지 않았을 때 배경 투명 */
+  color: black; /* 선택되지 않았을 때 글씨 색 검정 */
+  border: 1px solid black; /* 선택되지 않았을 때 border 색 검정 */
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* 선택된 태그 버튼 스타일 */
+.tag-button.selected {
+  background-color: #5724BE; /* 선택되었을 때 배경색 */
+  color: white; /* 선택되었을 때 글씨 색 흰색 */
+  border: 1px solid #5724BE; /* 선택되었을 때 border 색 */
+}
+
+.category {
+  font-weight: bold; /* 가격 텍스트를 두껍게 설정 */
+  font-size: 1.25rem; /* 가격 텍스트 크기 조절 */
+  display: block; /* 블록 요소로 설정하여 상하 여백 조절 가능 */
+}

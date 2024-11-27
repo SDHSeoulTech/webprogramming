@@ -1,0 +1,252 @@
+/* General Styles */
+.navbar {
+  background-color: #5724be;
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  padding: 0 1rem;
+  flex-wrap: nowrap;
+  height: 80px; /* 높이를 설정하여 두께 조정 */
+}
+
+.navbar-collapse {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center; /* 가로 중앙 정렬 */
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  align-items: center; /* 세로 중앙 정렬 */
+  width: 100%; /* 가로 폭을 100%로 설정 */
+}
+
+.navbar-nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  align-items: center; /* 세로 중앙 정렬 */
+}
+
+.navbar-nav .nav-item {
+  margin: 0 0.5rem; /* 기본 마진 조정 */
+}
+
+.nav-link {
+  color: #ffffff; /* 모든 nav-link 텍스트 색상 */
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 27px; /* 모든 nav-link 텍스트 크기 */
+  font-weight: 400; /* 모든 nav-link 텍스트 두께 */
+  text-align: center;
+}
+
+.nav-item-style {
+  color: #ffffff; /* 모든 nav-link 텍스트 색상 */
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 27px; /* 모든 nav-link 텍스트 크기 */
+  font-weight: 400; /* 모든 nav-link 텍스트 두께 */
+  text-align: center;
+}
+
+.nav-scroller {
+  display: flex;
+  justify-content: space-between; /* 수정: 아이템을 양 끝으로 정렬 */
+  align-items: center;
+  border-bottom: 5px solid #5724be;
+  padding: 10px 0;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.nav-underline {
+  display: flex;
+  justify-content: space-between; /* 수정: 아이템을 양 끝으로 정렬 */
+  align-items: center;
+  width: 100%;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.nav-underline .nav-link {
+  color: #000000;
+  margin: 0 1rem;
+}
+
+.link-body-emphasis {
+  color: #5724be;
+  font-weight: 700;
+}
+
+.d-none {
+  display: none;
+}
+
+.d-flex {
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Navbar Brand Container */
+.navbar-brand-container {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+/* Search Container */
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center; /* 이미지와 input을 수직 중앙 정렬 */
+}
+
+#search_input {
+  padding-right: 2.5rem; /* 이미지 공간 확보 */
+  width: 200px; /* input의 가로폭을 설정 (적절히 조정 가능) */
+}
+
+.search-icon {
+  position: absolute;
+  right: 15px; /* 이미지의 위치 조정 */
+  width: 24px; /* 이미지 크기 조정 */
+  height: 24px; /* 이미지 크기 조정 */
+  cursor: pointer; /* 마우스를 포인터로 변경 */
+}
+
+.icon_person {
+  display: flex;
+  align-items: center; /* 세로 중앙 정렬 */
+  justify-content: center; /* 가로 중앙 정렬 */
+  width: 35px; /* 아이콘의 가로 크기 조정 */
+  height: 35px; /* 아이콘의 세로 크기 조정 */
+  margin-left: 1rem; /* 아이콘 사이의 간격 조정 */
+}
+
+.icon_cart {
+  display: flex;
+  align-items: center; /* 세로 중앙 정렬 */
+  justify-content: center; /* 가로 중앙 정렬 */
+  width: 24px; /* 아이콘의 가로 크기 조정 */
+  height: 24px; /* 아이콘의 세로 크기 조정 */
+  margin-left: 1rem; /* 아이콘 사이의 간격 조정 */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .nav-item-style {
+    font-size: 27px; /* 기본 폰트 크기로 복원 */
+    margin-right: 1rem; /* 기본 마진으로 복원 */
+  }
+
+  .navbar-nav .nav-item {
+    margin: 0 0.5rem; /* 기본 마진으로 복원 */
+  }
+
+  .nav-underline .nav-link {
+    font-size: 27px; /* 기본 폰트 크기로 복원 */
+    margin: 0 0.5rem; /* 기본 마진으로 복원 */
+  }
+
+  .navbar-collapse {
+    flex-wrap: nowrap;
+    overflow-x: auto; /* 스크롤이 가능하도록 설정 */
+  }
+
+  .navbar {
+    padding: 0 1rem; /* 기본 패딩으로 복원 */
+    height: 80px; /* 높이 설정 */
+  }
+
+  .nav-item {
+    flex: 1 0 auto;
+    text-align: center;
+  }
+
+  .nav-link {
+    flex: 1 0 auto;
+    text-align: center;
+  }
+
+  .navbar-brand-container {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .navbar-nav {
+    display: flex;
+    justify-content: flex-start;
+    overflow-x: auto; /* 스크롤이 가능하도록 설정 */
+  }
+}
+
+/* Search Container */
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center; /* 이미지와 input을 수직 중앙 정렬 */
+}
+
+#search_input {
+  padding-right: 2.5rem; /* 이미지 공간 확보 */
+  width: 400px; /* input의 가로폭 */
+  height: 40px; /* input의 높이 설정 */
+  border: 1px solid #ccc; /* input의 경계선 설정 */
+  border-radius: 0; /* 네모 모서리 설정 */
+  background-color: #FFFBF5; /* 드롭다운과 일치하는 배경색 설정 */
+}
+
+.search-icon {
+  position: absolute;
+  right: 15px; /* 이미지의 위치 조정 */
+  width: 24px; /* 이미지 크기 조정 */
+  height: 24px; /* 이미지 크기 조정 */
+  cursor: pointer; /* 마우스를 포인터로 변경 */
+}
+
+.search-dropdown {
+  position: absolute;
+  top: 100%; /* input의 아래로 위치시킴 */
+  left: 0;
+  width: 400px; /* input과 동일한 가로폭 */
+  background-color: #FFFBF5; /* 배경색 */
+  border: 1px solid #ccc; /* input과 동일한 경계선 */
+  border-top: none; /* input과의 연결을 위해 상단 경계선 제거 */
+  z-index: 10;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 약간의 그림자 추가 */
+  border-radius: 0 0 5px 5px; /* 하단 모서리만 둥글게 설정 */
+}
+
+.recent-searches, .trending-searches {
+  padding: 10px;
+}
+
+.recent-searches ul, .trending-searches ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.recent-searches ul li, .trending-searches ul li {
+  padding: 5px 0;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+
+.recent-searches ul li:hover, .trending-searches ul li:hover {
+  background-color: #f0f0f0;
+}
+.search-icon-small {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
