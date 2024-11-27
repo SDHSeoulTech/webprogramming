@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const app = express();
-const PORT = 3000;
+const PORT = 8080;
 const SECRET_KEY = "your_secret_key"; // JWT 비밀키
 
 // Middleware
