@@ -91,7 +91,7 @@ function Bars() {
             </div>
             <form className="d-flex" role="search" id="search_form" onSubmit={handleSubmit}>
               <div className="search-container">
-                <input
+                {/* <input
                   className="form-control me-2"
                   type="search"
                   placeholder="Search"
@@ -100,7 +100,7 @@ function Bars() {
                   onFocus={handleFocus}
                   onBlur={handleBlur}
                   autoComplete="off"
-                />
+                /> */}
                 <img
                   src="/img/glass.png"
                   className="search-icon"
@@ -146,12 +146,12 @@ function Bars() {
                   </div>
                 )}
               </div>
-              <img
+              {/* <img
                 src="/img/person.png"
                 className="icon_person"
                 alt="person"
                 onClick={handlePersonClick}
-              />
+              /> */}
               <img
                 src="/img/cart.png"
                 className="icon_cart"

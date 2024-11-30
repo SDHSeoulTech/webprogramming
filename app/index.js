@@ -1,137 +1,89 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 
+// Express 서버 코드에서 CORS 설정 추가
+const cors = require('cors');
 const app = express();
 const PORT = 8080;
-const SECRET_KEY = "your_secret_key"; // JWT 비밀키
 
 // Middleware
-app.use(bodyParser.json());
+app.use(cors());  // CORS 설정을 app 선언 후에 추가
+app.use(bodyParser.json()); // JSON 파싱 미들웨어
 
-// MongoDB 연결
-mongoose.connect('mongodb://localhost:27017/mydatabase', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-mongoose.connection.once('open', () => {
-  console.log('Connected to MongoDB');
-});
-
-// 스키마 정의
-const userSchema = new mongoose.Schema({
-  username: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-});
-
-const productSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  price: { type: Number, required: true },
-  description: { type: String, default: "" },
-});
-
-// 모델 생성
-const User = mongoose.model('User', userSchema);
-const Product = mongoose.model('Product', productSchema);
-
-// 회원가입
-app.post('/register', async (req, res) => {
-  try {
-    const { username, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ username, password: hashedPassword });
-    await user.save();
-    res.status(201).json({ message: 'User registered successfully' });
-  } catch (err) {
-    res.status(500).json({ message: 'Error registering user', error: err.message });
-  }
-});
-
-// 로그인
-app.post('/login', async (req, res) => {
-  try {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username });
-    if (!user) return res.status(400).json({ message: 'Invalid credentials' });
-
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) return res.status(400).json({ message: 'Invalid credentials' });
-
-    const token = jwt.sign({ userId: user._id }, SECRET_KEY, { expiresIn: '1h' });
-    res.json({ message: 'Login successful', token });
-  } catch (err) {
-    res.status(500).json({ message: 'Error logging in', error: err.message });
-  }
-});
-
-// 인증 미들웨어
-const authenticate = (req, res, next) => {
-  const token = req.headers['authorization'];
-  if (!token) return res.status(403).json({ message: 'Token required' });
-
-  jwt.verify(token, SECRET_KEY, (err, decoded) => {
-    if (err) return res.status(403).json({ message: 'Invalid token' });
-    req.userId = decoded.userId;
-    next();
-  });
-};
+// 메모리 내 데이터 저장소 (더미 데이터 추가)
+let products = [
+  { id: 1, name: 'Product 1', price: 100, description: 'Description for product 1' },
+  { id: 2, name: 'Product 2', price: 200, description: 'Description for product 2' },
+  { id: 3, name: 'Product 3', price: 300, description: 'Description for product 3' },
+  { id: 4, name: 'Product 4', price: 400, description: 'Description for product 4' },
+  { id: 5, name: 'Product 5', price: 500, description: 'Description for product 5' },
+];
 
 // 상품 CRUD API
-app.post('/products', authenticate, async (req, res) => {
-  try {
-    const { name, price, description } = req.body;
-    const product = new Product({ name, price, description });
-    await product.save();
-    res.status(201).json({ message: 'Product created successfully', product });
-  } catch (err) {
-    res.status(500).json({ message: 'Error creating product', error: err.message });
+
+// 상품 생성
+app.post('/products', (req, res) => {
+  const { name, price, description } = req.body;
+  if (!name || !price) {
+    return res.status(400).json({ message: 'Name and price are required' });
   }
+  const product = {
+    id: products.length + 1,
+    name,
+    price,
+    description: description || '',
+  };
+  products.push(product);
+  res.status(201).json({ message: 'Product created successfully', product });
 });
 
-app.get('/products', authenticate, async (req, res) => {
-  try {
-    const products = await Product.find();
-    res.json(products);
-  } catch (err) {
-    res.status(500).json({ message: 'Error fetching products', error: err.message });
-  }
+// 상품 목록 조회
+app.get('/products', (req, res) => {
+  res.json(products); // products 배열을 JSON으로 반환
 });
 
-app.get('/products/:id', authenticate, async (req, res) => {
-  try {
-    const product = await Product.findById(req.params.id);
-    if (!product) return res.status(404).json({ message: 'Product not found' });
-    res.json(product);
-  } catch (err) {
-    res.status(500).json({ message: 'Error fetching product', error: err.message });
+// 상품 상세 조회
+app.get('/products/:id', (req, res) => {
+  const productId = parseInt(req.params.id, 10);
+  const product = products.find((p) => p.id === productId);
+  if (!product) {
+    return res.status(404).json({ message: 'Product not found' });
   }
+  res.json(product);
 });
 
-app.put('/products/:id', authenticate, async (req, res) => {
-  try {
-    const { name, price, description } = req.body;
-    const product = await Product.findByIdAndUpdate(
-      req.params.id,
-      { name, price, description },
-      { new: true }
-    );
-    if (!product) return res.status(404).json({ message: 'Product not found' });
-    res.json({ message: 'Product updated successfully', product });
-  } catch (err) {
-    res.status(500).json({ message: 'Error updating product', error: err.message });
+// 상품 수정
+app.put('/products/:id', (req, res) => {
+  const productId = parseInt(req.params.id, 10);
+  const { name, price, description } = req.body;
+  const productIndex = products.findIndex((p) => p.id === productId);
+
+  if (productIndex === -1) {
+    return res.status(404).json({ message: 'Product not found' });
   }
+
+  const updatedProduct = {
+    ...products[productIndex],
+    name: name || products[productIndex].name,
+    price: price || products[productIndex].price,
+    description: description || products[productIndex].description,
+  };
+
+  products[productIndex] = updatedProduct;
+  res.json({ message: 'Product updated successfully', product: updatedProduct });
 });
 
-app.delete('/products/:id', authenticate, async (req, res) => {
-  try {
-    const product = await Product.findByIdAndDelete(req.params.id);
-    if (!product) return res.status(404).json({ message: 'Product not found' });
-    res.json({ message: 'Product deleted successfully' });
-  } catch (err) {
-    res.status(500).json({ message: 'Error deleting product', error: err.message });
+// 상품 삭제
+app.delete('/products/:id', (req, res) => {
+  const productId = parseInt(req.params.id, 10);
+  const productIndex = products.findIndex((p) => p.id === productId);
+
+  if (productIndex === -1) {
+    return res.status(404).json({ message: 'Product not found' });
   }
+
+  products.splice(productIndex, 1);
+  res.json({ message: 'Product deleted successfully' });
 });
 
 // 서버 시작
