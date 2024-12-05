@@ -1,16 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
-// Express 서버 코드에서 CORS 설정 추가
 const cors = require('cors');
 const app = express();
 const PORT = 8080;
 
 // Middleware
-app.use(cors());  // CORS 설정을 app 선언 후에 추가
-app.use(bodyParser.json()); // JSON 파싱 미들웨어
+app.use(cors());
+app.use(bodyParser.json());
 
-// 메모리 내 데이터 저장소 (더미 데이터 추가)
+// 메모리 내 데이터 저장소
 let products = [
   { id: 1, name: 'Product 1', price: 100, description: 'Description for product 1' },
   { id: 2, name: 'Product 2', price: 200, description: 'Description for product 2' },
@@ -20,8 +18,6 @@ let products = [
 ];
 
 // 상품 CRUD API
-
-// 상품 생성
 app.post('/products', (req, res) => {
   const { name, price, description } = req.body;
   if (!name || !price) {
@@ -37,12 +33,10 @@ app.post('/products', (req, res) => {
   res.status(201).json({ message: 'Product created successfully', product });
 });
 
-// 상품 목록 조회
 app.get('/products', (req, res) => {
-  res.json(products); // products 배열을 JSON으로 반환
+  res.json(products);
 });
 
-// 상품 상세 조회
 app.get('/products/:id', (req, res) => {
   const productId = parseInt(req.params.id, 10);
   const product = products.find((p) => p.id === productId);
@@ -52,7 +46,6 @@ app.get('/products/:id', (req, res) => {
   res.json(product);
 });
 
-// 상품 수정
 app.put('/products/:id', (req, res) => {
   const productId = parseInt(req.params.id, 10);
   const { name, price, description } = req.body;
@@ -73,7 +66,6 @@ app.put('/products/:id', (req, res) => {
   res.json({ message: 'Product updated successfully', product: updatedProduct });
 });
 
-// 상품 삭제
 app.delete('/products/:id', (req, res) => {
   const productId = parseInt(req.params.id, 10);
   const productIndex = products.findIndex((p) => p.id === productId);
@@ -86,7 +78,6 @@ app.delete('/products/:id', (req, res) => {
   res.json({ message: 'Product deleted successfully' });
 });
 
-// 서버 시작
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

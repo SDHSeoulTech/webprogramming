@@ -152,12 +152,12 @@ function Bars() {
                 alt="person"
                 onClick={handlePersonClick}
               /> */}
-              <img
+              {/* <img
                 src="/img/cart.png"
                 className="icon_cart"
                 alt="cart"
                 onClick={handleCartClick}
-              />
+              /> */}
             </form>
           </div>
         </nav>
